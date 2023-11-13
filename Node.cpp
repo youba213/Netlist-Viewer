@@ -6,6 +6,7 @@
 #include  "Net.h"
 #include  "Instance.h"
 #include  "Cell.h"
+#include "XmlUtil.h"
 
 namespace Netlist {
 
@@ -60,9 +61,8 @@ namespace Netlist {
       if (termName.empty()) {
         int x = 0;
         int y = 0;
-        if (   xmlGetIntAttribute( reader, "x", x )
-           and xmlGetIntAttribute( reader, "y", y )) {
-          new NodePoint( net, (size_t)id, Point(x,y) );
+        if (xmlGetIntAttribute( reader, "x", x ) and xmlGetIntAttribute( reader, "y", y )) {
+          //new NodePoint( net, (size_t)id, Point(x,y) );
           return true;
         }
         return false;

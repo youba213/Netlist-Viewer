@@ -32,7 +32,7 @@ namespace Netlist{
         void  setPosition   ( int x, int y );
 
         void  toXml		   	(ostream&);
-        Instance* 					fromXml	(Cell*, xmlTextReaderPtr);
+        static Instance* 					fromXml	(Cell*, xmlTextReaderPtr);
 
 
     };

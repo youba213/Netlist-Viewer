@@ -2,6 +2,7 @@
 #include "Cell.h"
 #include "Node.h"
 #include "Term.h"
+#include "XmlUtil.h"
 
 namespace Netlist
 {   
@@ -165,20 +166,7 @@ namespace Netlist
                     	exit(0) ;
                     }                    
                 }
-                else if((nodeName == lineTag))
-                {
-                	
-                	if(Line::fromXml(net,reader))
-                	{
-      
-                		continue ;
-                	}
-                	else
-                	{
-                		cerr << "Impossible de charger les lines depuis le net" << endl ;
-                		exit(0) ;
-                	}
-                }
+                 
                 else
                 {
                     break;       

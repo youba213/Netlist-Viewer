@@ -32,6 +32,7 @@ class Term
         static std::string  toString    ( Type );
         static std::string  toString    ( Direction );
         static Direction    toDirection ( std::string );
+        static Type 		toType(std::string) ;
         inline bool               isInternal   () const{
             return (type_ == Internal) ? true : false ;
         }
@@ -73,7 +74,7 @@ inline void  setDirection ( Direction dir){
        void  setPosition  ( int x, int y );
 
        void				toXml		 (ostream&) ;
-       Term* 		fromXml		 (Cell*, xmlTextReaderPtr reader) ;
+       static Term* 		fromXml		 (Cell*, xmlTextReaderPtr reader) ;
        
 
 

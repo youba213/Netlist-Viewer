@@ -41,6 +41,9 @@ namespace Netlist {
                    bool                    connect           ( const std::string& name, Net* net );
                    unsigned int            newNetId          ();
                    void                     toXml            (ostream&) const ;
+    static        Cell*        fromXml           (xmlTextReaderPtr reader);
+    static        Cell*         load    ( const string& cellName ) ;
+                  void          save             () const ;
     private:
       static  std::vector<Cell*>      cells_;
               std::string             name_;
@@ -48,9 +51,7 @@ namespace Netlist {
               std::vector<Instance*>  instances_;
               std::vector<Net*>       nets_;
               unsigned int            maxNetIds_;
-                  Cell*        fromXml           (xmlTextReaderPtr reader);
-                  Cell*         load    ( const string& cellName ) ;
-                  void          save             () const ;
+    
   };
 
 

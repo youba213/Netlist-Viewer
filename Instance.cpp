@@ -2,6 +2,7 @@
 #include "Cell.h"
 #include <iostream>
 #include "algorithm"
+#include "XmlUtil.h"
 
 namespace Netlist{
 

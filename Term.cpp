@@ -1,7 +1,8 @@
-#include"Term.h"
+#include "Term.h"
 #include "Cell.h"
 #include "Instance.h"
 #include "Net.h"
+#include "XmlUtil.h"
 
 namespace Netlist
 {
@@ -104,6 +105,22 @@ namespace Netlist
 			}
 
     }
+    Term::Type Term::toType(std::string s) 
+	{
+		if( s == "Internal")
+		{
+			return Internal ;
+		}
+		else if( s == "External")
+		{
+			return External ;
+		}
+		else
+		{
+			cerr << "Le type saisi est incorrect" ;
+			exit(0) ;
+		}
+	}
        void  Term::setNet       ( Net* net){
         if (net == NULL) {
 			net_->remove(&node_);

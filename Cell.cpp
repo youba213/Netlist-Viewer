@@ -1,10 +1,12 @@
 // -*- explicit-buffer-name: "Cell.cpp<M1-MOBJ/4-5>" -*-
 
 #include  <cstdlib>
+#include  <fstream>
 #include  "Cell.h"
 #include  "Term.h"
 #include  "Net.h"
 #include  "Instance.h"
+#include "XmlUtil.h"
 
 
 namespace Netlist {
@@ -301,12 +303,12 @@ Cell* Cell::fromXml ( xmlTextReaderPtr reader )
 
 Cell* Cell::load ( const string& cellName )
 {
-  string           cellFile = "./cells/" + cellName + ".xml";
+  string           cellFile = "/home/youba/eclipse-workspace/Mobj_TME4-5/src/cells/" + cellName + ".xml";
   xmlTextReaderPtr reader;
-
+  
   reader = xmlNewTextReaderFilename( cellFile.c_str() );
   if (reader == NULL) {
-    cerr << "[ERROR] Cell::load() unable to open file <" << cellFile << ">." << endl;
+    cerr << "[ERROR] Cell::load() unable to open file <" << cellFile.c_str() << ">." <<endl;
     return NULL;
   }
 
@@ -327,7 +329,7 @@ void  Cell::save () const
   }
 
   cerr << "Saving <Cell " << getName() << "> in <" << fileName << ">" << endl;
-  toXml( fileStream );
+  toXml(fileStream);
 
   fileStream.close();
 }
