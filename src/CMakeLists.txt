@@ -20,6 +20,7 @@
                                       Node.h
                                       Cell.h
                                       XmlUtil.h
+                                      Box.h
                        )
 
                     set( cpps         Indentation.cpp
@@ -31,6 +32,7 @@
                                       Cell.cpp
                                       Main.cpp
                                       XmlUtil.cpp
+                                      Box.cpp
                        )
 
         add_executable ( tme6        ${cpps} )

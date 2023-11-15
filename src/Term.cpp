@@ -1,3 +1,4 @@
+#include <string>
 #include "Term.h"
 #include "Cell.h"
 #include "Instance.h"
@@ -207,7 +208,7 @@ namespace Netlist
 			{
 					Direction direction = toDirection(direction_string) ;
 					Term* term = new Term(Cell, term_name, direction) ;
-					term->setPosition(stoi(x_string),stoi(y_string)) ;
+					term->setPosition(atoi(x_string.c_str()),atoi(y_string.c_str())) ;
 					return term ;
 			}
 			else 

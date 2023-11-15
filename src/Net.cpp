@@ -106,7 +106,7 @@ namespace Netlist
 		std::vector<Node*> nodes = this->getNodes() ;		
 		indent++ ;
         // on affiche les nodes
-		for(auto it = nodes.begin() ; it != nodes.end() ; ++it) 
+		for(std::vector<Node*>::iterator it = nodes.begin() ; it != nodes.end() ; ++it) 
 		{
 			if((*it) !=NULL)
 			{
