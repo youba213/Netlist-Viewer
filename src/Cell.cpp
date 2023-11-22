@@ -317,7 +317,7 @@ Cell* Cell::fromXml ( xmlTextReaderPtr reader )
 
 Cell* Cell::load ( const string& cellName )
 {
-  string           cellFile = "/home/youba/eclipse-workspace/Mobj_TME4-5/src/cells/" + cellName + ".xml";
+  string           cellFile = "../src/cells/" + cellName + ".xml";
   xmlTextReaderPtr reader;
   
   reader = xmlNewTextReaderFilename( cellFile.c_str() );
