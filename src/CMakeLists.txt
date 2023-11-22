@@ -6,7 +6,7 @@
  cmake_minimum_required(VERSION 2.8.0)
  project(SCHEMATIC)
  
- set (CMAKE_CXX_FLAGS            "-Wall -g" CACHE STRING "C++ Compiler Release options." FORCE)
+ set (CMAKE_CXX_FLAGS            "-Wall -g -std=c++11" CACHE STRING "C++ Compiler Release options." FORCE)
  set (CMAKE_INSTALL_PREFIX       "../install" )
 
  find_package(LibXml2 REQUIRED)
