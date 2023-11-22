@@ -7,6 +7,7 @@
 #include <vector>
 #include "Indentation.h"
 #include  <libxml/xmlreader.h>
+#include "Symbol.h"
 
 namespace Netlist {
 
@@ -18,6 +19,7 @@ namespace Netlist {
 
 
   class Cell {
+    
     public:
       static       std::vector<Cell*>&     getAllCells       ();
       static       Cell*                   find              ( const std::string& );
@@ -31,6 +33,7 @@ namespace Netlist {
                    Instance*               getInstance       ( const std::string& ) const;
                    Term*                   getTerm           ( const std::string& ) const;
                    Net*                    getNet            ( const std::string& ) const;
+      inline       Symbol*                 getSymbol         ();
                    void                    setName           ( const std::string& );
                    void                    add               ( Instance* );
                    void                    add               ( Term* );
@@ -51,6 +54,7 @@ namespace Netlist {
               std::vector<Instance*>  instances_;
               std::vector<Net*>       nets_;
               unsigned int            maxNetIds_;
+              Symbol                  symbol_;
     
   };
 
@@ -59,6 +63,7 @@ namespace Netlist {
   inline const std::vector<Instance*>& Cell::getInstances () const { return instances_; };
   inline const std::vector<Term*>&     Cell::getTerms     () const { return terms_; };
   inline const std::vector<Net*>&      Cell::getNets      () const { return nets_; };
+  inline       Symbol*                 Cell::getSymbol         (){return const_cast<Symbol*>(&symbol_);};
 
 
 }  // Netlist namespace.

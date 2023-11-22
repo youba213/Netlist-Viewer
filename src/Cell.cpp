@@ -32,6 +32,7 @@ namespace Netlist {
     , instances_()
     , nets_     ()
     , maxNetIds_(0)
+    , symbol_(this)
   {
     if (find(name)) {
       cerr << "[ERROR] Attempt to create duplicate of Cell <" << name << ">.\n"
@@ -200,13 +201,16 @@ Cell* Cell::fromXml ( xmlTextReaderPtr reader )
               , EndInstances
               , BeginNets
               , EndNets
+              , BeginSymbol
               , EndCell
+              ,ParseError
               };
 
   const xmlChar* cellTag      = xmlTextReaderConstString( reader, (const xmlChar*)"cell" );
   const xmlChar* netsTag      = xmlTextReaderConstString( reader, (const xmlChar*)"nets" );
   const xmlChar* termsTag     = xmlTextReaderConstString( reader, (const xmlChar*)"terms" );
   const xmlChar* instancesTag = xmlTextReaderConstString( reader, (const xmlChar*)"instances" );
+  const xmlChar* symbolTag    = xmlTextReaderConstString( reader, (const xmlChar*)"symbol" );
 
   Cell* cell   = NULL;
   State state  = Init;
@@ -239,6 +243,8 @@ Cell* Cell::fromXml ( xmlTextReaderPtr reader )
             state = BeginTerms;
             continue;
           }
+          else
+              state = ParseError;
         }
         break;
       case BeginTerms:
@@ -277,10 +283,18 @@ Cell* Cell::fromXml ( xmlTextReaderPtr reader )
         break;
       case EndNets:
         if ( (nodeName == netsTag) and (xmlTextReaderNodeType(reader) == XML_READER_TYPE_END_ELEMENT) ) {
-          state = EndCell;
+          state = BeginSymbol;
           continue;
         } else {
           if (Net::fromXml(cell,reader)) continue;
+        }
+        break;
+      case BeginSymbol:  
+        if ( (nodeName == symbolTag) and (xmlTextReaderNodeType(reader) == XML_READER_TYPE_ELEMENT) ) {
+          if (Symbol::fromXml(cell,reader)) {
+            state = EndCell;
+            continue;
+          }
         }
         break;
       case EndCell:

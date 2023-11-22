@@ -26,7 +26,7 @@ class Term
         Direction     direction_;
         Type          type_;
         Net*          net_;
-        Node          node_;
+        NodeTerm          node_;
 
      public:
         static std::string  toString    ( Type );
