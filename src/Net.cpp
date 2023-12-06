@@ -69,7 +69,6 @@ namespace Netlist
         {
             if (nodes_[i] == NULL)
             {
-                std::cout << "getfreeNodes" << std::endl;
                 return i;
                 break; // dès que l'on rencontre une pointeur NULL on arrete la boucle et on renvoie sa valeur
             }

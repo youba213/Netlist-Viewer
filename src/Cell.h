@@ -46,7 +46,7 @@ namespace Netlist {
                    void                     toXml            (ostream&) const ;
     static        Cell*        fromXml           (xmlTextReaderPtr reader);
     static        Cell*         load    ( const string& cellName ) ;
-                  void          save             () const ;
+                  void          save    (const std::string& ) const ;
     private:
       static  std::vector<Cell*>      cells_;
               std::string             name_;

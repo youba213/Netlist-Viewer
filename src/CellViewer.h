@@ -4,6 +4,7 @@
 namespace Netlist{
 class Cell;
 class CellWidget;
+class SaveCellDialog ;
 
 class CellViewer : public QMainWindow {
         Q_OBJECT ;

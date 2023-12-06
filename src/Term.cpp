@@ -125,10 +125,10 @@ namespace Netlist
         if (net == NULL) {
 			net_->remove(&node_);
 			net_ = NULL;
-		}
-		else if (net_ == NULL) {
-			net->add(&node_);
-			net_ = net;
+	}
+	else if (net_ == NULL) {
+		net->add(&node_);
+		net_ = net;
 		}
 		else {
 			if (net_->remove(&node_)) {

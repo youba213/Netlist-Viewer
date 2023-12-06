@@ -333,9 +333,9 @@ Cell* Cell::load ( const string& cellName )
 }
 
 
-void  Cell::save () const
+void  Cell::save (const std::string& name ) const
 {
-  string  fileName   = getName() + ".xml";
+  string  fileName = (name.empty()) ? getName() + ".xml" : name + ".xml";
   fstream fileStream ( fileName.c_str(), ios_base::out|ios_base::trunc );
   if (not fileStream.good()) {
     cerr << "[ERROR] Cell::save() unable to open file <" << fileName << ">." << endl;

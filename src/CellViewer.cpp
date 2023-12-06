@@ -39,16 +39,27 @@ CellViewer::CellViewer( QWidget* parent)
 
     connect ( action , SIGNAL ( triggered ()) , this , SLOT ( close ()) );
 }
-    void CellViewer::saveCell ()
-    {
-        Cell* cell = getCell ();
-        if ( cell == NULL ) return ;
+CellViewer::~CellViewer()
+{
+    delete cellWidget_ ;
 
-        QString cellName = cell -> getName (). c_str ();
+}
+void CellViewer::setCell (Cell* cell){
+    cellWidget_ -> setCell(cell); //setup le dessin dans la fenetre
+}
+Cell* CellViewer::getCell() const {
+    return cellWidget_-> getCell(); //recuperer la cell de dessin
+}
+void CellViewer::saveCell ()
+{
+    Cell* cell = getCell ();
+    if ( cell == NULL ) return ;
 
-        if ( saveCellDialog_ -> run ( cellName )) {
-            cell -> setName ( cellName.toStdString () );
-            cell -> save ( cellName.toStdString () );
-        }
+    QString cellName = cell -> getName (). c_str ();
+
+    if ( saveCellDialog_ -> run ( cellName )) {
+        cell -> setName ( cellName.toStdString () );
+        cell -> save ( cellName.toStdString () );
     }
+}
 }
