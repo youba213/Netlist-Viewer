@@ -16,6 +16,9 @@ namespace Netlist {
 
   vector<Cell*>  Cell::cells_;
 
+  vector<Cell*>& Cell::getAllCells ()
+  { return cells_; }
+
 
   Cell* Cell::find ( const string& name )
   {

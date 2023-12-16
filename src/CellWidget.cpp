@@ -6,6 +6,9 @@
 #include  <QBrush>
 #include  <QFont>
 #include  <QApplication>
+#include  <QRect>
+#include  <QLine>
+
 #include  "CellWidget.h"
 #include  "Term.h"
 #include  "Instance.h"
@@ -40,6 +43,7 @@ namespace Netlist {
   CellWidget::CellWidget ( QWidget* parent )
     : QWidget(parent)
     , cell_  (NULL)
+    ,viewport_ ( Box (0 ,0 ,500 ,500))
   {
     setAttribute    ( Qt::WA_OpaquePaintEvent );
     setAttribute    ( Qt::WA_NoSystemBackground );
@@ -66,8 +70,50 @@ namespace Netlist {
 
 
   void  CellWidget::resizeEvent ( QResizeEvent* event )
-  { repaint(); }
+  { 
+    const QSize & size = event -> size ();
+    viewport_ . setX2 ( viewport_ . getX1 () + size . width () );
+    viewport_ . setY1 ( viewport_ . getY2 () - size . height () );
+    cerr << " CellWidget :: resizeEvent () ␣ viewport_ : " << viewport_ << endl ;
+  }
 
+  void CellWidget :: keyPressEvent ( QKeyEvent * event ) 
+  {
+    event -> ignore ();
+    if ( event -> modifiers () & ( Qt :: ControlModifier | Qt :: ShiftModifier ))
+    return ;
+    switch ( event -> key ()) {
+    case Qt :: Key_Up : goUp (); break ;
+    case Qt :: Key_Down : goDown (); break ;
+    case Qt :: Key_Left : goLeft (); break ;
+    case Qt :: Key_Right : goRight (); break ;
+    default : return ;
+    }
+    event -> accept ();
+  }
+
+  void CellWidget :: goRight () 
+  {
+  viewport_ . translate ( Point (20 ,0) );
+  repaint ();
+  }
+
+  void CellWidget :: goUp () {
+  viewport_ . translate ( Point (0 ,20) );
+  repaint ();
+  }
+
+  void CellWidget :: goDown () // ATTENTION VALEUR AU PIF PSQ NIQUE
+  {
+    viewport_ . translate ( Point (0,-20) );
+    repaint ();
+  }
+
+  void CellWidget :: goLeft () //  ATTENTION VALEUR AU PIF PSQ NIQUE
+  {
+    viewport_ . translate ( Point (-20,0) );
+    repaint ();
+  }
 
   void  CellWidget::paintEvent ( QPaintEvent* event )
   {

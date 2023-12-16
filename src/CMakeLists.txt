@@ -34,6 +34,11 @@
                     set( mocIncludes  SaveCellDialog.h
                                       CellWidget.h
                                       CellViewer.h
+                                      CellsLib.h
+                                      InstancesWidget.h
+                                      OpenCellDialog.h
+                                      InstancesModel.h
+                                      CellsModel.h
                        )
 
                     set( cpps         Indentation.cpp
@@ -51,7 +56,12 @@
                                       SaveCellDialog.cpp
                                       CellWidget.cpp
                                       CellViewer.cpp
+                                      CellsLib.cpp
                                       Main.cpp
+                                      InstancesModel.cpp
+                                      CellsModel.cpp
+                                      InstancesWidget.cpp
+                                      OpenCellDialog.cpp
                        )
 
            qt4_wrap_cpp( mocCpps      ${mocIncludes} )

@@ -5,11 +5,15 @@
 #include <QVBoxLayout>
 #include <QMenu>
 #include <QMenuBar>
-#include "SaveCellDialog.h"
 
 #include "CellViewer.h"
+#include "SaveCellDialog.h"
 #include "Cell.h"
 #include "CellWidget.h"
+#include "CellsLib.h"
+#include "CellsModel.h"
+#include "InstancesWidget.h"
+#include "OpenCellDialog.h"
 
 namespace Netlist{ 
 
@@ -39,19 +43,17 @@ CellViewer::CellViewer( QWidget* parent)
 
     connect ( action , SIGNAL ( triggered ()) , this , SLOT ( close ()) );
 }
-CellViewer::~CellViewer()
-{
+
+CellViewer::~CellViewer(){
     delete cellWidget_ ;
 
 }
-void CellViewer::setCell (Cell* cell){
-    cellWidget_ -> setCell(cell); //setup le dessin dans la fenetre
-}
+
 Cell* CellViewer::getCell() const {
     return cellWidget_-> getCell(); //recuperer la cell de dessin
 }
-void CellViewer::saveCell ()
-{
+
+void CellViewer::saveCell (){
     Cell* cell = getCell ();
     if ( cell == NULL ) return ;
 
@@ -62,4 +64,38 @@ void CellViewer::saveCell ()
         cell -> save ( cellName.toStdString () );
     }
 }
+void CellViewer::setCell(Cell* cellule){
+    cellWidget_->setCell(cellule) ; // on va setup le dessin que l'on veut dans la fenetre. 
+    instancesWidget_ -> setCell(cellule) ; // permet de setup toutes les instances d'une entitée chargée
+    cellsLib_ -> getBaseModel() -> setCell(cellule) ; //pas de setCell dans cellLib.h
+
 }
+void CellViewer::openCell(){ // doit recuperer le nom de la cellule a ouvrir
+	
+    QString cellName ;
+    Cell* cell;
+    if(OpenCellDialog::run(cellName,this ))
+    {	
+
+        cell = Cell::find(cellName.toStdString()) ;
+
+        if(not(cell)) // si find renvoie NULL c'est que la cellule n'est pas chargée dans ce cas on va la load5
+        {
+
+            cell = Cell::load(cellName.toStdString()) ;
+            if(cell == nullptr) // on test si le load a bien réussi, permet d'éviter une segfault
+            {
+                return ;
+            }
+            cell->	setName(cellName.toStdString()) ;
+            this -> setCell(cell) ;
+            cerr << "Cell is well loaded " << endl ;			
+        }
+        else //Si find ne renvoie pas NULL c'est que la cellule est déjà chargée, dans ce cas on va juste l'afficher
+        {
+            cerr << "Cell is already load, printing " << endl ;
+            cell->	setName(cellName.toStdString()) ;
+            this -> setCell(cell) ;
+        }
+    }
+}}
