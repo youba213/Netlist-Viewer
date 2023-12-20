@@ -1,4 +1,11 @@
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include "OpenCellDialog.h"
+#include "CellViewer.h"
+#include "CellWidget.h"
 
 namespace Netlist
 {
@@ -49,7 +56,7 @@ namespace Netlist
   {
     return lineEdit_->setText(name);
   }
-  bool OpenCellDialog::run(QString& name)
+  bool OpenCellDialog::run(QString& name, CellViewer* parent)
   {
     OpenCellDialog ocd;
     ocd.setCellName(name);
