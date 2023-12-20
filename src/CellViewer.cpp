@@ -1,25 +1,25 @@
-#include <QLabel>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QMenu>
-#include <QMenuBar>
-
 #include "CellViewer.h"
-#include "SaveCellDialog.h"
 #include "Cell.h"
-#include "CellWidget.h"
 #include "CellsLib.h"
 #include "CellsModel.h"
+#include "CellWidget.h"
 #include "InstancesWidget.h"
+#include "SaveCellDialog.h"
 #include "OpenCellDialog.h"
+
+#include <QMessageBox>
+#include <QDialog>
+#include <QMenu>
+#include <QAction> 
+#include <QMenuBar>
 
 namespace Netlist{ 
 
 CellViewer::CellViewer( QWidget* parent)
     : QMainWindow ( parent )
     , cellWidget_ ( NULL )
+    , cellsLib_(NULL)
+	, instancesWidget_(NULL)
     , saveCellDialog_ ( NULL )
 {
     cellWidget_     =    new CellWidget     ();
@@ -98,4 +98,14 @@ void CellViewer::openCell(){ // doit recuperer le nom de la cellule a ouvrir
             this -> setCell(cell) ;
         }
     }
-}}
+}
+
+void CellViewer::showInstancesWidget ()
+{
+    instancesWidget_->show();
+}
+void CellViewer::showCellsLib()
+{
+    cellsLib_ -> show() ;
+}
+}
