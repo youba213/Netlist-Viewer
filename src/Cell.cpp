@@ -189,7 +189,7 @@ namespace Netlist {
       (*inet)->toXml( stream );
     }
     stream << --indent << "</nets>\n";
-
+    symbol_.toXml( stream );
     stream << --indent << "</cell>\n";
   }
 

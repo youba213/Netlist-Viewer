@@ -31,7 +31,9 @@ namespace Netlist
       QPushButton* load_;
   };
 
-  inline CellsModel* CellsLib::getBaseModel(){return baseModel_ ;} ;
+  inline CellsModel* CellsLib::getBaseModel(){
+    return baseModel_ ;
+    } ;
 
 
 }

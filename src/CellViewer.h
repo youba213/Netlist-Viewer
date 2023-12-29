@@ -23,6 +23,8 @@ class CellViewer : public QMainWindow {
 
         void      showCellsLib        (); 
         void      showInstancesWidget ();  
+    signals :
+        void    cellLoaded() ;
     private :
         CellWidget*     cellWidget_ ;
         SaveCellDialog* saveCellDialog_ ;

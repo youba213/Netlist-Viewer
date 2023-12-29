@@ -9,7 +9,16 @@
 #include <QRect>
 #include <QPoint>
 class QPainter;
+
 #include "Box.h"
+#include  "Term.h"
+#include  "Instance.h"
+#include  "Symbol.h"
+#include  "Shape.h"
+#include  "Cell.h"
+#include  "Line.h"
+#include  "Node.h"
+#include  "Net.h"
 
 
 namespace Netlist {
@@ -43,6 +52,7 @@ namespace Netlist {
     protected:
       virtual void    paintEvent         ( QPaintEvent* );
       virtual void    keyPressEvent      ( QKeyEvent* );
+              void    mouseMoveEvent     (QMouseEvent*);
     
     public slots:
 
@@ -54,6 +64,8 @@ namespace Netlist {
     private:
       Cell* cell_;
       Box   viewport_;
+      int width_screen_size, height_screen_size;
+      void query(QPainter&);
   };
 
 

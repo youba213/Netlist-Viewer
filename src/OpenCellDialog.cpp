@@ -48,6 +48,10 @@ namespace Netlist
     connect(    okButton, SIGNAL(clicked()), this, SLOT(accept()));
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
   }
+  OpenCellDialog::~OpenCellDialog		()
+  {
+
+  }
   const QString OpenCellDialog::getCellName() const
   {
     return lineEdit_->text();

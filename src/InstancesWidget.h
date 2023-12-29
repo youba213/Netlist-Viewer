@@ -32,5 +32,9 @@ namespace Netlist
               QTableView*     view_; 
               QPushButton*    load_;
   };
-  inline void InstancesWidget::setCell(Cell* cellule) {return baseModel_ -> setCell(cellule) ; };  
+  inline void InstancesWidget::setCell(Cell* cellule) {
+        baseModel_ -> setCell(cellule) ;
+    
+  }
+
 }

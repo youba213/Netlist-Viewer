@@ -56,4 +56,5 @@ namespace Netlist
 		cellViewer_ ->CellViewer::setCell(baseModel_ ->getModel(selectedRow)); // on charge la MasterCell dans le main 
 		cerr <<"Chargement de " << cellViewer_ -> getCell() -> getName() <<" réussi" << endl ;
 	}
+	
 }
